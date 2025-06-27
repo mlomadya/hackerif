@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "../productsData";
 import Image from "next/image";
@@ -18,7 +19,9 @@ export default function ProductDetails({ params }: Props) {
         <div className="bg-gray-100 rounded p-4 text-gray-800 mb-4 w-full">
           {product.details}
         </div>
-        <a href="/products" className="text-blue-600 hover:underline">&larr; الرجوع للمنتجات</a>
+        <Link href="/products" className="text-blue-600 hover:underline">&larr; الرجوع للمنتجات</Link>
+// ...existing code...
+import Link from "next/link";
       </div>
     </main>
   );

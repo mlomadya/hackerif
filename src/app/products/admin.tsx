@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { products as productsData } from "./data";
 import { useRouter } from "next/navigation";
 
@@ -161,7 +162,7 @@ export default function ProductsAdminPage() {
             <div>
               <label className="block mb-1 font-semibold">صورة المنتج</label>
               <input type="file" accept="image/*" onChange={handleImageChange} />
-              {imageUrl && <img src={imageUrl} alt="صورة المنتج" className="mt-2 w-24 h-24 object-cover rounded" />}
+              {imageUrl && <Image src={imageUrl} alt="صورة المنتج" width={96} height={96} className="mt-2 w-24 h-24 object-cover rounded" />}
             </div>
             <div className="flex gap-2">
               <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full">إضافة</button>
@@ -181,8 +182,10 @@ export default function ProductsAdminPage() {
                   <input name="category" value={form.category || ""} onChange={handleChange} className="border rounded px-2 py-1 w-24" required />
                   <input type="file" accept="image/*" onChange={handleEditImageChange} />
                   {(editImageUrl || product.image) && (
-                    <img src={editImageUrl || product.image} alt="صورة المنتج" className="w-16 h-16 object-cover rounded" />
+                    <Image src={editImageUrl || product.image || "/vercel.svg"} alt="صورة المنتج" width={64} height={64} className="w-16 h-16 object-cover rounded" />
                   )}
+// ...existing code...
+import Image from "next/image";
                   <button type="submit" className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">حفظ</button>
                   <button type="button" className="bg-gray-200 text-blue-600 px-3 py-1 rounded" onClick={() => setEditId(null)}>إلغاء</button>
                 </form>

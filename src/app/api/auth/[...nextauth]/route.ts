@@ -37,7 +37,7 @@ export const authOptions = {
       if (session.user && token.sub) {
         session.user.id = Number(token.sub); // تأكد أن id رقم
       }
-      return session;
+      return session as import("next-auth").Session;
     },
   },
 };

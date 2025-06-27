@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { products } from "../../products/productsData";
 import Link from "next/link";
 import { getCart, setCart as setCartLS } from "../../lib/cartStorage";
@@ -63,7 +64,7 @@ interface CartProduct {
             <div className="space-y-4 mb-6">
               {cartProducts.map((product: CartProduct) => (
                 <div key={product.slug} className="flex items-center gap-4 border-b pb-3">
-                  <img src={product.image} alt={product.name} className="w-16 h-16 object-contain rounded" />
+                  <Image src={product.image} alt={product.name} width={64} height={64} className="w-16 h-16 object-contain rounded" />
                   <div className="flex-1">
                     <div className="font-semibold">{product.name}</div>
                     <div className="text-gray-500 text-sm">{product.description}</div>

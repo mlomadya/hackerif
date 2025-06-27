@@ -39,9 +39,9 @@ export default function ProductsPage() {
     const product = products.find((p) => p.slug === slug);
     if (!product) return;
     let currentCart = getCart();
-    const exists = currentCart.find((item: any) => item.slug === slug);
+    const exists = currentCart.find((item: { slug: string; quantity: number }) => item.slug === slug);
     if (exists) {
-      currentCart = currentCart.map((item: any) =>
+      currentCart = currentCart.map((item: { slug: string; quantity: number }) =>
         item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item
       );
     } else {

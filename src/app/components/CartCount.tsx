@@ -9,7 +9,7 @@ export default function CartCount() {
     // تحديث العدد عند تحميل الصفحة وأي تغيير في localStorage
     function updateCount() {
       const cart = getCart();
-      setCount(cart.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0));
+      setCount(cart.reduce((sum: number, item: { quantity?: number }) => sum + (item.quantity || 1), 0));
     }
     updateCount();
     window.addEventListener("storage", updateCount);
