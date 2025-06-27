@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import { compare } from "bcryptjs";
 import { JWT } from "next-auth/jwt";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -45,3 +45,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
+export { authOptions };
