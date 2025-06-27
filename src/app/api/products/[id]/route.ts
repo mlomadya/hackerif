@@ -13,7 +13,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       data: { name, price: Number(price), image, description },
     });
     return NextResponse.json({ product });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'حدث خطأ أثناء التعديل' }, { status: 500 });
   }
 }
@@ -23,7 +23,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     const id = Number(params.id);
     await prisma.product.delete({ where: { id } });
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'حدث خطأ أثناء الحذف' }, { status: 500 });
   }
 }

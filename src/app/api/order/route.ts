@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     // هنا يمكنك حفظ الطلب في قاعدة بيانات أو إرساله لبريد إلكتروني
     // الآن فقط نعيد البيانات كاختبار
     return NextResponse.json({ success: true, order: data });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ success: false, error: 'خطأ في معالجة الطلب' }, { status: 400 });
   }
 }

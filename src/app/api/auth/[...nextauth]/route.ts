@@ -1,7 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
 import { compare } from "bcryptjs";
+import { JWT } from "next-auth/jwt";
 
 export const authOptions = {
   providers: [
@@ -33,11 +34,11 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ session, token }: { session: any, token: any }) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       if (session.user && token.sub) {
-        session.user.id = Number(token.sub); // تأكد أن id رقم
+        (session.user as { id?: number }).id = Number(token.sub);
       }
-      return session as import("next-auth").Session;
+      return session;
     },
   },
 };

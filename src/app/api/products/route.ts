@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const products = await prisma.product.findMany({
       select: {
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
       orderBy: { id: 'desc' },
     });
     return NextResponse.json({ products });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ products: [], error: 'حدث خطأ أثناء جلب المنتجات' }, { status: 500 });
   }
 }
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       },
     });
     return NextResponse.json({ product });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'حدث خطأ أثناء إضافة المنتج' }, { status: 500 });
   }
 }

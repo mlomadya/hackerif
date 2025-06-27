@@ -3,14 +3,14 @@ import { writeFile } from 'fs/promises';
 import path from 'path';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import prisma from '@/lib/prisma';
+// import prisma from '@/lib/prisma';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   // حماية: السماح فقط للمستخدمين المسجلين
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user?.id) {
+  const session = await getServerSession(authOptions) as import("next-auth").Session;
+  if (!session || !(session.user && (session.user as { id?: number }).id)) {
     return NextResponse.json({ error: 'غير مصرح' }, { status: 401 });
   }
   try {
