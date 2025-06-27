@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { products } from "../data";
+import { products } from "../productsData";
 import Image from "next/image";
 
 interface Props {

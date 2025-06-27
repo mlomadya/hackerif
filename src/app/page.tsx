@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { books } from "./books/data";
-import { products } from "./products/data";
+import { products } from "./products/productsData";
 import { motion } from "framer-motion";
 
 export default function Home() {

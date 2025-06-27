@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { products } from "../../products/data";
+import { products } from "../../products/productsData";
 import Link from "next/link";
 import { getCart, setCart as setCartLS } from "../../lib/cartStorage";
 
