@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import prisma from '@/lib/prisma';
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
   const session = await getServerSession(authOptions) as import("next-auth").Session;
   if (!session || !(session.user && (session.user as { id?: number }).id)) {
     return NextResponse.json({ user: null }, { status: 401 });
