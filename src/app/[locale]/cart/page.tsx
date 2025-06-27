@@ -29,13 +29,25 @@ export default function CartPage() {
     );
     setCart(updated);
   };
+interface CartProduct {
+  slug: string;
+  name: string;
+  description: string;
+  image: string;
+  details: string;
+  category: string;
+  price: number;
+  quantity: number;
+}
 
-  const cartProducts = cart.map((item) => {
-    const product = products.find((p) => p.slug === item.slug);
-    return product ? { ...product, quantity: item.quantity } : null;
-  }).filter(Boolean);
+  const cartProducts = cart
+    .map((item) => {
+      const product = products.find((p) => p.slug === item.slug);
+      return product ? { ...product, quantity: item.quantity } : null;
+    })
+    .filter(Boolean) as CartProduct[];
 
-  const totalPrice = cartProducts.reduce((sum, product: any) => sum + (product.price * product.quantity), 0);
+  const totalPrice = cartProducts.reduce((sum, product: CartProduct) => sum + (product.price * product.quantity), 0);
 
   return (
     <main className="container mx-auto py-10 rtl text-right">
@@ -49,7 +61,7 @@ export default function CartPage() {
         ) : (
           <>
             <div className="space-y-4 mb-6">
-              {cartProducts.map((product: any) => (
+              {cartProducts.map((product: CartProduct) => (
                 <div key={product.slug} className="flex items-center gap-4 border-b pb-3">
                   <img src={product.image} alt={product.name} className="w-16 h-16 object-contain rounded" />
                   <div className="flex-1">
