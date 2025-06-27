@@ -1,6 +1,8 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export async function GET(_req: NextRequest) {
   try {
     const products = await prisma.product.findMany({
       select: {
