@@ -122,7 +122,7 @@ export default function CartPage() {
                 <PayPalScriptProvider options={{ clientId: "Actm6eEOmIL9E5KkJRF6B9TunwGqDNTPGm-T6Wndjnrj-q3E3EcfWny-a7MwkKvOkfSSXq5e8dHg871p", currency: "USD" }}>
                   <PayPalButtons
                     style={{ layout: "vertical" }}
-                    createOrder={(data: any, actions: any) => {
+                    createOrder={(data: unknown, actions: any) => {
                       return actions.order.create({
                         purchase_units: [{
                           amount: {
@@ -132,8 +132,8 @@ export default function CartPage() {
                         }],
                       });
                     }}
-                    onApprove={(data: any, actions: any) => {
-                      return actions.order?.capture().then((details: any) => {
+                    onApprove={(data: unknown, actions: any) => {
+                      return actions.order?.capture().then(() => {
                         setCart([]);
                         setMessage("تم الدفع بنجاح! شكراً لثقتك بنا.");
                       });
