@@ -3,10 +3,11 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { products } from "../products/productsData";
 import Link from "next/link";
 import { getCart, setCart } from "../lib/cartStorage";
-import emailjs from 'emailjs-com';
+
 interface CartProduct {
   slug: string;
   name: string;
@@ -80,7 +81,7 @@ export default function CartPage() {
             <div className="flex flex-col gap-4 mb-6">
               {cartProducts.map((product: CartProduct) => (
                 <div key={product.slug} className="flex items-center gap-4 border-b pb-4 last:border-b-0 bg-gray-50 rounded-lg px-2 py-2">
-                  <img src={product.image || '/vercel.svg'} alt={product.name} className="w-16 h-16 object-cover rounded shadow border border-gray-200" />
+                  <Image src={product.image || '/vercel.svg'} alt={product.name} width={64} height={64} className="w-16 h-16 object-cover rounded shadow border border-gray-200" />
                   <div className="flex-1">
                     <div className="font-semibold text-blue-900">{product.name}</div>
                     <div className="text-gray-500 text-xs mb-1 line-clamp-1">{product.description}</div>
@@ -118,12 +119,13 @@ export default function CartPage() {
             <div className="w-full flex flex-col gap-3 mt-6">
               {/* PayPal */}
               <div className="rounded-lg border border-gray-200 p-3 flex flex-col gap-2 bg-white shadow-sm">
-                <span className="font-bold text-blue-700 mb-1 flex items-center gap-2"><img src="/vercel.svg" alt="PayPal" className="w-5 h-5" />الدفع عبر PayPal</span>
+                <span className="font-bold text-blue-700 mb-1 flex items-center gap-2"><Image src="/vercel.svg" alt="PayPal" width={20} height={20} className="w-5 h-5" />الدفع عبر PayPal</span>
                 <PayPalScriptProvider options={{ clientId: "Actm6eEOmIL9E5KkJRF6B9TunwGqDNTPGm-T6Wndjnrj-q3E3EcfWny-a7MwkKvOkfSSXq5e8dHg871p", currency: "USD" }}>
                   <PayPalButtons
                     style={{ layout: "vertical" }}
-                    createOrder={(data: unknown, actions: any) => {
+                    createOrder={(_data, actions) => {
                       return actions.order.create({
+                        intent: "CAPTURE",
                         purchase_units: [{
                           amount: {
                             currency_code: "USD",
@@ -132,11 +134,12 @@ export default function CartPage() {
                         }],
                       });
                     }}
-                    onApprove={(data: unknown, actions: any) => {
-                      return actions.order?.capture().then(() => {
+                    onApprove={async (_data, actions) => {
+                      if (actions.order) {
+                        await actions.order.capture();
                         setCart([]);
                         setMessage("تم الدفع بنجاح! شكراً لثقتك بنا.");
-                      });
+                      }
                     }}
                     onError={() => setMessage("حدث خطأ أثناء الدفع. حاول مرة أخرى.")}
                   />
