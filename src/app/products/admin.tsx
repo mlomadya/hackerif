@@ -130,7 +130,7 @@ export default function ProductsAdminPage() {
     if (!isLoggedIn) {
       router.push("/");
     }
-  }, []);
+  }, [router]);
 
   return (
     <main className="container mx-auto py-10 rtl text-right">
