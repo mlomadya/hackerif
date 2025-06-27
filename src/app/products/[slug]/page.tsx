@@ -20,8 +20,6 @@ export default function ProductDetails({ params }: Props) {
           {product.details}
         </div>
         <Link href="/products" className="text-blue-600 hover:underline">&larr; الرجوع للمنتجات</Link>
-// ...existing code...
-import Link from "next/link";
       </div>
     </main>
   );

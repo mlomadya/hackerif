@@ -32,8 +32,6 @@ export default function BlogPage() {
         {posts.map((post, idx) => (
           <div key={idx} className="bg-white rounded-lg shadow p-4 flex flex-col hover:scale-105 transition-transform border-b-4 border-blue-100 dark:bg-gray-900 dark:border-gray-700 dark:shadow-lg">
             <Image src={post.image} alt={post.title} width={600} height={160} className="w-full h-40 object-cover rounded mb-4" />
-// ...existing code...
-import Image from "next/image";
             <h2 className="font-semibold text-xl mb-2 text-blue-700 dark:text-yellow-400">{post.title}</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-2">{post.excerpt}</p>
             <Link href={`/blog/${post.slug}`} className="text-blue-600 dark:text-yellow-300 hover:underline mt-auto">اقرأ المزيد</Link>

@@ -184,8 +184,6 @@ export default function ProductsAdminPage() {
                   {(editImageUrl || product.image) && (
                     <Image src={editImageUrl || product.image || "/vercel.svg"} alt="صورة المنتج" width={64} height={64} className="w-16 h-16 object-cover rounded" />
                   )}
-// ...existing code...
-import Image from "next/image";
                   <button type="submit" className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">حفظ</button>
                   <button type="button" className="bg-gray-200 text-blue-600 px-3 py-1 rounded" onClick={() => setEditId(null)}>إلغاء</button>
                 </form>
