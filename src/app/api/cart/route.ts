@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma';
 
 // احصل على userId من الجلسة (يدعم next-auth الافتراضي)
 import { Session } from "next-auth";
-import { JWT } from "next-auth/jwt";
+// import { JWT } from "next-auth/jwt";
 async function getUserId() {
   const session = await getServerSession(authOptions) as Session;
   if (session?.user && (session.user as { id?: number }).id) {
@@ -15,7 +15,6 @@ async function getUserId() {
 }
 
 // جلب السلة الحالية للمستخدم
-export async function GET(_req: NextRequest) {
   const userId = await getUserId();
   if (!userId) return NextResponse.json({ error: 'غير مصرح' }, { status: 401 });
   const cart = await prisma.cart.findUnique({

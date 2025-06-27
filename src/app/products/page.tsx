@@ -7,15 +7,15 @@ import { products } from './productsData';
 import Image from "next/image";
 import { getCart, setCart } from '../lib/cartStorage';
 
-interface Product {
-  slug: string;
-  name: string;
-  description: string;
-  image: string;
-  details: string;
-  category: string;
-  price: number;
-}
+// interface Product {
+//   slug: string;
+//   name: string;
+//   description: string;
+//   image: string;
+//   details: string;
+//   category: string;
+//   price: number;
+// }
 
 export default function ProductsPage() {
   // تحديد اللغة من المسار

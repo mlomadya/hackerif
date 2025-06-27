@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { books } from './data';
 
@@ -12,11 +13,14 @@ export default function BooksPage() {
             key={idx}
             className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-5 flex flex-col items-center border border-zinc-100 dark:border-zinc-800 hover:scale-105 hover:shadow-2xl transition-all duration-300 animate-fadein group"
           >
-            <img
+            <Image
               src={book.image}
               alt={book.name}
+              width={112}
+              height={112}
               className="w-28 h-28 object-contain mb-4 rounded-xl border border-zinc-200 dark:border-zinc-700 group-hover:rotate-2 group-hover:scale-110 transition-all"
             />
+            {/* استيراد Image */}
             <h2 className="font-bold text-lg mb-1 text-blue-700 dark:text-blue-300 text-center">{book.name}</h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-2 text-center line-clamp-2">{book.description}</p>
             <div className="flex items-center gap-2 mb-2">

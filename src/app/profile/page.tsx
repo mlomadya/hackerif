@@ -81,7 +81,7 @@ export default function ProfilePage() {
           setError("فشل رفع الصورة: " + (uploadData.error || ""));
           return;
         }
-      } catch (err) {
+      } catch {
         setError("فشل رفع الصورة.");
         return;
       }
@@ -103,7 +103,7 @@ export default function ProfilePage() {
       } else {
         setError(data.error || "حدث خطأ أثناء التحديث");
       }
-    } catch (err) {
+      } catch {
       setError("حدث خطأ أثناء التحديث.");
     }
   };

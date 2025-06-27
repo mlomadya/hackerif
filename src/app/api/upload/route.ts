@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     await writeFile(uploadPath, buffer);
     const url = `/uploads/${fileName}`;
     return NextResponse.json({ url });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'حدث خطأ أثناء رفع الصورة' }, { status: 500 });
   }
 }

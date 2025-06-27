@@ -28,10 +28,10 @@ export default function ProductsAdminPage() {
   const [editId, setEditId] = useState<number | null>(null);
   const [form, setForm] = useState<Partial<Product>>({});
   const [showAdd, setShowAdd] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  // const [message, setMessage] = useState<string | null>(null);
+  // const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [editImageFile, setEditImageFile] = useState<File | null>(null);
+  // const [editImageFile, setEditImageFile] = useState<File | null>(null);
   const [editImageUrl, setEditImageUrl] = useState<string>("");
   // إشعار مؤقت
   const [notif, setNotif] = useState<{ type: 'success' | 'error', msg: string } | null>(null);
@@ -48,7 +48,7 @@ export default function ProductsAdminPage() {
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setImageFile(file);
+    // setImageFile(file); // لم يعد مستخدماً
     // رفع الصورة مباشرة عند اختيارها
     const formData = new FormData();
     formData.append("file", file);
@@ -67,7 +67,7 @@ export default function ProductsAdminPage() {
   const handleEditImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setEditImageFile(file);
+    // setEditImageFile(file); // لم يعد مستخدماً
     // رفع الصورة إلى /api/upload
     const formData = new FormData();
     formData.append("file", file);
@@ -92,7 +92,7 @@ export default function ProductsAdminPage() {
     };
     setProducts([newProduct, ...products]);
     setForm({});
-    setImageFile(null);
+    // setImageFile(null); // لم يعد مستخدماً
     setImageUrl("");
     setShowAdd(false);
     showNotif('success', 'تمت إضافة المنتج بنجاح!');
@@ -113,7 +113,7 @@ export default function ProductsAdminPage() {
     } : p));
     setEditId(null);
     setForm({});
-    setEditImageFile(null);
+    // setEditImageFile(null); // لم يعد مستخدماً
     setEditImageUrl("");
     showNotif('success', 'تم تحديث المنتج بنجاح!');
   };
