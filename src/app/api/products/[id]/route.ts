@@ -6,8 +6,8 @@ export async function PUT(request: Request, context: { params?: { id?: string } 
   if (!id) {
     return new Response("معرّف المنتج غير موجود", { status: 400 });
   }
-  const data = await request.json();
-  // هنا تضع منطق التعامل مع البيانات
+  // const data = await request.json();
+  // هنا تضع منطق التعامل مع البيانات إذا احتجت لاحقًا
   return new Response("تم التحديث بنجاح", { status: 200 });
 }
 
