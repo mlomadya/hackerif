@@ -51,10 +51,7 @@ export default function RootLayout({
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 20l9-5-9-5-9 5 9 5zm0 0v-8" /></svg>
               <span className="font-bold">الكتب</span>
             </Link>
-            <Link href="/contact" className="relative bg-blue-600 text-white px-4 py-2 rounded-full shadow hover:bg-blue-700 transition flex items-center gap-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 10.5a8.38 8.38 0 01-1.9.8c-.5.1-.7.2-1.1.2a8.5 8.5 0 01-7.8-7.8c0-.4.1-.6.2-1.1.2-.6.5-1.2.8-1.9A2 2 0 0012 2a2 2 0 00-2 2c0 .3.1.6.2.9.2.6.5 1.2.8 1.9A8.5 8.5 0 013.5 12c0 .4.1.6.2 1.1.2.6.5 1.2.8 1.9A2 2 0 004 20a2 2 0 002 2c.3 0 .6-.1.9-.2.6-.2 1.2-.5 1.9-.8A8.5 8.5 0 0121 10.5z" /></svg>
-              <span className="font-bold">اتصل بنا</span>
-            </Link>
+            {/* زر اتصل بنا تم حذفه */}
             {/* زر السلة بارز مع عداد */}
             <CartNavButton />
             <Link href="/profile" className="relative bg-blue-600 text-white px-4 py-2 rounded-full shadow hover:bg-blue-700 transition flex items-center gap-2 ml-auto">

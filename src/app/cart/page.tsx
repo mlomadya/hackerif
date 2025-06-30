@@ -3,6 +3,7 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 import React, { useState, useEffect } from "react";
+import OrderForm from "../components/OrderForm";
 import Image from "next/image";
 import { products } from "../products/productsData";
 import Link from "next/link";
@@ -115,58 +116,14 @@ export default function CartPage() {
             >
               <span className="font-semibold">إفراغ السلة</span>
             </button>
-            {/* خيارات الدفع فقط: PayPal و Binance Pay */}
-            <div className="w-full flex flex-col gap-3 mt-6">
-              {/* PayPal */}
-              <div className="rounded-lg border border-gray-200 p-3 flex flex-col gap-2 bg-white shadow-sm">
-                <span className="font-bold text-blue-700 mb-1 flex items-center gap-2"><Image src="/vercel.svg" alt="PayPal" width={20} height={20} className="w-5 h-5" />الدفع عبر PayPal</span>
-                <PayPalScriptProvider options={{ clientId: "Actm6eEOmIL9E5KkJRF6B9TunwGqDNTPGm-T6Wndjnrj-q3E3EcfWny-a7MwkKvOkfSSXq5e8dHg871p", currency: "USD" }}>
-                  <PayPalButtons
-                    style={{ layout: "vertical" }}
-                    createOrder={(_data, actions) => {
-                      return actions.order.create({
-                        intent: "CAPTURE",
-                        purchase_units: [{
-                          amount: {
-                            currency_code: "USD",
-                            value: totalPrice.toString(),
-                          },
-                        }],
-                      });
-                    }}
-                    onApprove={async (_data, actions) => {
-                      if (actions.order) {
-                        await actions.order.capture();
-                        setCart([]);
-                        setMessage("تم الدفع بنجاح! شكراً لثقتك بنا.");
-                      }
-                    }}
-                    onError={() => setMessage("حدث خطأ أثناء الدفع. حاول مرة أخرى.")}
-                  />
-                </PayPalScriptProvider>
-              </div>
-              {/* Binance Pay */}
-              <div className="rounded-lg border border-yellow-300 p-3 flex flex-col gap-2 bg-yellow-50 shadow-sm">
-                <span className="font-bold text-yellow-700 mb-1 flex items-center gap-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="12" fill="#F3BA2F"/><path d="M12 6.343l1.414 1.414-3.89 3.89-1.414-1.414L12 6.343zm3.89 3.89l1.414 1.414-5.304 5.304-1.414-1.414 5.304-5.304zm-7.78 0l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zm9.192 2.828l1.414 1.414-3.89 3.89-1.414-1.414 3.89-3.89z" fill="#181A20"/></svg>
-                  الدفع عبر Binance Pay
-                </span>
-                <button
-                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded flex items-center justify-center gap-2 mt-1 transition"
-                  onClick={() => {
-                    window.open('https://pay.binance.com/qr/YOUR_BINANCE_PAY_LINK', '_blank');
-                    setMessage("يرجى إتمام الدفع عبر Binance Pay ثم التواصل معنا لتأكيد الطلب.");
-                  }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="12" fill="#F3BA2F"/><path d="M12 6.343l1.414 1.414-3.89 3.89-1.414-1.414L12 6.343zm3.89 3.89l1.414 1.414-5.304 5.304-1.414-1.414 5.304-5.304zm-7.78 0l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zm9.192 2.828l1.414 1.414-3.89 3.89-1.414-1.414 3.89-3.89z" fill="#181A20"/></svg>
-                  ادفع الآن عبر Binance Pay
-                </button>
-              </div>
-            </div>
+            {/* تم حذف خيارات الدفع (PayPal و Binance Pay) بناءً على طلبك */}
           </>
         )}
         <div className="flex justify-between items-center mt-8 flex-col gap-4">
           <Link href="/products" className="text-blue-600 hover:underline text-sm">&larr; متابعة التسوق</Link>
+        </div>
+        <div className="mt-10">
+          <OrderForm defaultProduct={cartProducts.length > 0 ? cartProducts.map(p => `${p.name} (x${p.quantity})`).join(", ") : ""} />
         </div>
       </div>
     </main>

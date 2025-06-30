@@ -100,30 +100,7 @@ interface CartProduct {
         )}
         <div className="flex justify-between items-center mt-8">
           <Link href="/products" className="text-blue-600 hover:underline">&larr; متابعة التسوق</Link>
-          {cartProducts.length > 0 && (
-            <button
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
-              onClick={async () => {
-                try {
-                  const res = await fetch('/api/order', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: cartProducts, total: totalPrice }),
-                  });
-                  if (res.ok) {
-                    setCart([]); setCartLS([]);
-                    setMessage("تم إرسال الطلب بنجاح! سيتم التواصل معك قريباً.");
-                  } else {
-                    setMessage("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
-                  }
-                } catch {
-                  setMessage("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
-                }
-              }}
-            >
-              تأكيد الطلب
-            </button>
-          )}
+          {/* تم حذف زر إرسال الطلب عبر API لأن الطلبات ترسل عبر EmailJS فقط */}
         </div>
       </div>
     </main>
