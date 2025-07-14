@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { withOptimize } from '@prisma/extension-optimize';
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
@@ -6,7 +7,11 @@ export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
     log: ['query', 'info', 'warn', 'error'],
-  });
+  }).$extends(
+    withOptimize({
+      apiKey: process.env.OPTIMIZE_API_KEY ?? ''
+    })
+  );
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
@@ -32,11 +37,7 @@ export async function addToCart({ userId, productSlug, quantity = 1 }: { userId:
     console.error('المنتج غير موجود');
     throw new Error('المنتج غير موجود');
   }
-  // مثال: إذا كان لديك حقل isActive أو isAvailable في المنتج
-  if (product.hasOwnProperty('isActive') && product.isActive === false) {
-    console.error('المنتج غير متاح للبيع');
-    throw new Error('المنتج غير متاح للبيع');
-  }
+  // إذا كان لديك حقل isActive أو isAvailable في المنتج، فعّل هذا الشرط بعد تعديله حسب قاعدة بياناتك
 
   let cart = await prisma.cart.findUnique({ where: { userId: Number(userId) } });
   if (!cart) {
